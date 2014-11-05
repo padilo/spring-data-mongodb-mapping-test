@@ -18,10 +18,10 @@ public class CustomerRepositoryTest {
     @Test
     public void testFindOne() {
         /*
-         * This generates call loads a customer from MongoDB and fails trying to GenericItemType which is abstract,
-         * but by Customer class definition it should try to instantiate a ItemType instead  
+         * Loads a customer from MongoDB and fails trying to GenericItemType which is abstract,
+         * but by Customer class definition it should try to instantiate a ItemType instead.
          */
-        customerRepository.findOne(1L);        
+        customerRepository.findOne(1L);
     }
 
 }
