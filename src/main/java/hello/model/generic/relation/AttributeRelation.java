@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class AttributeRelation<T extends AbstractDocument> extends LazyRelation<T> {
+public class AttributeRelation<T extends AbstractDocument> extends EagerRelation<T> {
 
     private Map<String, String> attributes;
 

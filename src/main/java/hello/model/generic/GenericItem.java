@@ -1,6 +1,6 @@
 package hello.model.generic;
 
-import hello.model.generic.relation.LazyRelation;
+import hello.model.generic.relation.EagerRelation;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -10,9 +10,9 @@ public abstract class GenericItem<T extends GenericItemType> extends AbstractDoc
     private ObjectId id;
     private String name;
     private Integer weight;
-    private LazyRelation<T> type;
+    private EagerRelation<T> type;
     
-    public GenericItem(String name, Integer weight, LazyRelation<T> type) {
+    public GenericItem(String name, Integer weight, EagerRelation<T> type) {
         super();
         this.id = new ObjectId();
         this.name = name;
@@ -39,7 +39,7 @@ public abstract class GenericItem<T extends GenericItemType> extends AbstractDoc
         return id;
     }
 
-    public LazyRelation<T> getType() {
+    public EagerRelation<T> getType() {
         return type;
     }
 

@@ -4,7 +4,7 @@ import hello.model.Customer;
 import hello.model.Item;
 import hello.model.ItemType;
 import hello.model.generic.relation.AttributeRelation;
-import hello.model.generic.relation.LazyRelation;
+import hello.model.generic.relation.EagerRelation;
 import hello.repositories.CustomerRepository;
 import hello.repositories.ItemRepository;
 import hello.repositories.ItemTypeRepository;
@@ -40,8 +40,8 @@ public class Application implements CommandLineRunner {
         // save a couple of customers
         Customer customer = new Customer(1L, "Alice", "Smith",
                 AttributeRelation.Builder.of(
-                        new Item("Laptop 23A-FZ", 42, new LazyRelation<ItemType>(new ItemType("Laptops"))),
-                        new Item("TV 55' A22-P", 69, new LazyRelation<ItemType>(new ItemType("TV")))
+                        new Item("Laptop 23A-FZ", 42, new EagerRelation<ItemType>(new ItemType("Laptops"))),
+                        new Item("TV 55' A22-P", 69, new EagerRelation<ItemType>(new ItemType("TV")))
                         )
                 );
         
@@ -49,7 +49,7 @@ public class Application implements CommandLineRunner {
                 .map(AttributeRelation::getContent)
                 .map(itemRepo::save)
                 .map(Item::getType)
-                .map(LazyRelation::getContent)
+                .map(EagerRelation::getContent)
                 .forEach(itemTypeRepo::save);
                 
         repository.save(new Customer(2L, "Bob", "Smith", Collections.<AttributeRelation<Item>> emptyList()));
