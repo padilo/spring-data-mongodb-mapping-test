@@ -1,10 +1,16 @@
 package hello.model.generic;
 
-public abstract class GenericItemType {
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+
+public abstract class GenericItemType extends AbstractDocument {
+    @Id
+    private ObjectId id;
     private String description;
 
     public GenericItemType(String description) {
         super();
+        this.id = new ObjectId();
         this.description = description;
     }
 
@@ -14,4 +20,13 @@ public abstract class GenericItemType {
                 "%s[description=%s]", 
                 this.getClass().getSimpleName(), description);
     }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+    
 }

@@ -1,8 +1,9 @@
 package hello.model;
 
-import java.util.List;
-
 import hello.model.generic.GenericCustomer;
+import hello.model.generic.relation.AttributeRelation;
+
+import java.util.List;
 
 public class Customer extends GenericCustomer<Item>{
 
@@ -10,8 +11,10 @@ public class Customer extends GenericCustomer<Item>{
         super();
     }
 
-    public Customer(Long id, String firstName, String lastName, List<Item> items) {
+    public Customer(Long id, String firstName, String lastName, List<AttributeRelation<Item>> items) {
         super(id, firstName, lastName, items);
     }
 
+
+    
 }

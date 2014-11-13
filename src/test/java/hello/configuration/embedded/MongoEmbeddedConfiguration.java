@@ -1,10 +1,9 @@
-package hello;
+package hello.configuration.embedded;
 
 import java.io.IOException;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 import com.mongodb.Mongo;
 
