@@ -1,20 +1,26 @@
 package hello.model;
 
-import hello.model.generic.GenericCustomer;
-import hello.model.generic.relation.AttributeRelation;
+import hello.model.generic.AbstractCustomer;
 
-import java.util.List;
+import org.springframework.data.annotation.Id;
 
-public class Customer extends GenericCustomer<Item>{
+public class Customer extends AbstractCustomer<Item> {
+    @Id
+    private Long id;
+    private String name;
 
-    public Customer() {
-        super();
+    public Customer(Long id, String name, Relation<Item> item) {
+        super(item);
+        this.id = id;
+        this.name = name;
     }
 
-    public Customer(Long id, String firstName, String lastName, List<AttributeRelation<Item>> items) {
-        super(id, firstName, lastName, items);
+    public Long getId() {
+        return id;
     }
 
+    public String getName() {
+        return name;
+    }
 
-    
 }

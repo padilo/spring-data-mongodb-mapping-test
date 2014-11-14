@@ -1,13 +1,26 @@
 package hello.model;
 
-import hello.model.generic.GenericItem;
-import hello.model.generic.relation.EagerRelation;
+import hello.model.generic.AbstractItem;
 
-public class Item extends GenericItem<ItemType>{
+import org.springframework.data.annotation.Id;
 
-    public Item(String name, Integer weight, EagerRelation<ItemType> type) {
-        super(name, weight, type);
+public class Item extends AbstractItem<ItemType> {
+    @Id
+    private Long id;
+    private String name;
+    
+    public Item(Long id, String name, Relation<ItemType> type) {
+        super(type);
+        this.id = id;
+        this.name = name;
     }
 
+     public String getName() {
+        return name;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
 }

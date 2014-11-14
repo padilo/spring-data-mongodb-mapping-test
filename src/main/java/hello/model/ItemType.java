@@ -1,11 +1,22 @@
 package hello.model;
 
-import hello.model.generic.GenericItemType;
+import org.springframework.data.annotation.Id;
 
-public class ItemType extends GenericItemType {
+public class ItemType {
+    @Id
+    private Long id;
+    private String description;
 
-    public ItemType(String description) {
-        super(description);
+    public ItemType(Long id,String description) {
+        this.id = id;
+        this.description = description;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }

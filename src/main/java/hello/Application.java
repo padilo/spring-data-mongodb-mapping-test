@@ -3,13 +3,10 @@ package hello;
 import hello.model.Customer;
 import hello.model.Item;
 import hello.model.ItemType;
-import hello.model.generic.relation.AttributeRelation;
-import hello.model.generic.relation.EagerRelation;
+import hello.model.Relation;
 import hello.repositories.CustomerRepository;
 import hello.repositories.ItemRepository;
 import hello.repositories.ItemTypeRepository;
-
-import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -37,23 +34,12 @@ public class Application implements CommandLineRunner {
 
         repository.deleteAll();
 
-        // save a couple of customers
-        Customer customer = new Customer(1L, "Alice", "Smith",
-                AttributeRelation.Builder.of(
-                        new Item("Laptop 23A-FZ", 42, new EagerRelation<ItemType>(new ItemType("Laptops"))),
-                        new Item("TV 55' A22-P", 69, new EagerRelation<ItemType>(new ItemType("TV")))
-                        )
-                );
+        Customer customer = new Customer(1L, "Alice",
+                new Relation<Item>(
+                        new Item(1L, "TV 55' A22-P", new Relation<ItemType>(new ItemType(1L, "TV")))
+                ));
         
-        repository.save(customer).getItems().stream()
-                .map(AttributeRelation::getContent)
-                .map(itemRepo::save)
-                .map(Item::getType)
-                .map(EagerRelation::getContent)
-                .forEach(itemTypeRepo::save);
-                
-        repository.save(new Customer(2L, "Bob", "Smith", Collections.<AttributeRelation<Item>> emptyList()));
-
+        itemTypeRepo.save(itemRepo.save(repository.save(customer).getItem().getContent()).getType().getContent());
 
     }
 
